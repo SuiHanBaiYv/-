@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>塔防大战 · Tower Defense</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- 顶部 HUD -->
+  <header class="hud">
+    <div class="hud-logo">
+      <span class="logo-mark">🏰</span>
+      <div class="logo-txt">
+        <b>塔防大战</b>
+        <small>守住最后一道防线</small>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat stat-gold">
+        <span class="s-label">金币</span>
+        <span class="s-val" id="hud-gold">0</span>
+      </div>
+      <div class="stat stat-life">
+        <span class="s-label">生命</span>
+        <span class="s-val" id="hud-lives">0</span>
+      </div>
+      <div class="stat stat-wave">
+        <span class="s-label">波次</span>
+        <span class="s-val" id="hud-wave">0 / 16</span>
+        <span class="badge" id="hud-wave-name">准备中</span>
+      </div>
+      <div class="stat stat-score">
+        <span class="s-label">得分</span>
+        <span class="s-val" id="hud-score">0</span>
+      </div>
+    </div>
+
+    <div class="hud-tools">
+      <button class="tool" id="btn-target" title="切换索敌优先级 (T)">🎯 最前</button>
+      <button class="tool" id="btn-speed" title="切换速度 (F)">×1</button>
+      <button class="tool" id="btn-pause" title="暂停 (P)">⏸ 暂停</button>
+      <button class="tool" id="btn-mute" title="音效开关">🔊 音效</button>
+      <button class="tool danger" id="btn-restart" title="重新开始">↻ 重开</button>
+    </div>
+  </header>
+
+  <!-- 主体 -->
+  <main class="stage">
+    <section class="board-wrap">
+      <div class="hint-narrow">
+        <span>👉</span>
+        <span>棋盘可左右滑动查看全部区域，格子较小建议用横屏或电脑游玩</span>
+      </div>
+      <div class="board-frame">
+        <div class="board-scroll">
+          <canvas id="game" width="800" height="480"></canvas>
+        </div>
+
+        <!-- 横幅提示 -->
+        <div class="banner" id="banner"></div>
+
+        <!-- 提示条 -->
+        <div class="tip" id="tip"></div>
+
+        <!-- 结束遮罩 -->
+        <div class="overlay" id="overlay">
+          <div class="overlay-card" id="overlay-body"></div>
+        </div>
+      </div>
+
+      <!-- 控制条 -->
+      <div class="controls">
+        <button class="btn-wave" id="btn-wave">▶ 开始第 1 波</button>
+        <div class="ctrl-right">
+          <label class="chk"><input type="checkbox" id="chk-dmg" checked> 伤害数字</label>
+          <span class="kbd-hint">1-4 选塔 · 空格开波 · ESC 取消 · P 暂停</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 侧栏 -->
+    <aside class="side">
+      <div class="card">
+        <div class="card-head">
+          <h3>建造防御塔</h3>
+          <span class="card-sub">选中后点空地</span>
+        </div>
+        <div class="shop" id="shop"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>防御塔信息</h3>
+        </div>
+        <div class="panel-info" id="panel-info"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-head">
+          <h3>下一波来袭</h3>
+        </div>
+        <div class="next-box" id="next-box"></div>
+      </div>
+
+      <div class="card card-help">
+        <div class="card-head"><h3>玩法提示</h3></div>
+        <ul class="help">
+          <li><b>箭塔</b> 输出稳定，最先造</li>
+          <li><b>炮塔</b> 范围伤害，清杂兵</li>
+          <li><b>冰塔</b> 减速延长其他塔输出</li>
+          <li><b>电塔</b> 连锁伤害，怕单体怕群</li>
+          <li>拐角处放塔收益最高</li>
+          <li>提前开波换取额外金币</li>
+        </ul>
+      </div>
+    </aside>
+  </main>
+</div>
+
+<script src="js/config.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>
